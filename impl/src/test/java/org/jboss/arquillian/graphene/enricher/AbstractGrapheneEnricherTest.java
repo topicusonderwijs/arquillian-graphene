@@ -42,7 +42,7 @@ import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 /**
  * @author <a href="mailto:jhuska@redhat.com">Juraj Huska</a>
@@ -82,7 +82,7 @@ public abstract class AbstractGrapheneEnricherTest {
         pageObjectEnricher = new PageObjectEnricher();
         pageFragmentEnricher = new PageFragmentEnricher(configuration);
         when(serviceLoaderInstance.get()).thenReturn(serviceLoader);
-        when(serviceLoader.all(TestEnricher.class)).thenReturn(Arrays.asList(grapheneEnricher));
+//        when(serviceLoader.all(TestEnricher.class)).thenReturn(Arrays.asList(grapheneEnricher));
         when(serviceLoader.all(SearchContextTestEnricher.class)).thenReturn(Arrays.asList(webElementEnricher, pageObjectEnricher, pageFragmentEnricher));
         for (Object o: Arrays.asList(grapheneEnricher, webElementEnricher, pageObjectEnricher, pageFragmentEnricher)) {
             Field serviceLoaderField;

@@ -30,8 +30,8 @@ public abstract class AbstractBooleanConditionFactory<F extends BooleanCondition
 
     @Override
     public F not() {
-        AbstractBooleanConditionFactory copy = (AbstractBooleanConditionFactory) copy();
-        copy.setNegation(!this.getNegation());
+        F copy = copy();
+        ((AbstractBooleanConditionFactory<?>) copy).setNegation(!this.getNegation());
         return (F) copy;
     }
 

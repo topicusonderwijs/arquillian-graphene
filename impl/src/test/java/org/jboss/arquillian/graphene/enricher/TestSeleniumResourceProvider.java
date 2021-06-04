@@ -44,14 +44,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.Coordinates;
 import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.Mouse;
-import org.openqa.selenium.interactions.internal.Coordinates;
 
 
 
@@ -66,23 +66,7 @@ public class TestSeleniumResourceProvider {
 
     @Before
     public void setUp() {
-        when(((HasInputDevices) driver).getKeyboard()).thenReturn(new Keyboard() {
-            @Override
-            public void sendKeys(CharSequence... keysToSend) {
-                throw new UnsupportedOperationException("Not supported yet.");
-            }
-
-            @Override
-            public void pressKey(CharSequence keyToPress) {
-                throw new UnsupportedOperationException("Not supported yet.");
-            }
-
-            @Override
-            public void releaseKey(CharSequence keyToRelease) {
-                throw new UnsupportedOperationException("Not supported yet.");
-            }
-        });
-        when(((HasInputDevices) driver).getMouse()).thenReturn(new Mouse() {
+       when(((HasInputDevices) driver).getMouse()).thenReturn(new Mouse() {
 
             @Override
             public void click(Coordinates where) {
@@ -188,7 +172,6 @@ public class TestSeleniumResourceProvider {
         Mouse mouse = mock(Mouse.class);
         Keyboard keyboard = mock(Keyboard.class);
         when(((HasInputDevices) driver).getMouse()).thenReturn(mouse);
-        when(((HasInputDevices) driver).getKeyboard()).thenReturn(keyboard);
         // when
         Actions actions = (Actions) provider.lookup(null, null);
         actions.click().perform();

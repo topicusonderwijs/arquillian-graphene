@@ -21,21 +21,21 @@
  */
 package org.jboss.arquillian.graphene.page.extension;
 
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import junit.framework.Assert;
 import org.jboss.arquillian.graphene.spi.javascript.JavaScript;
 import org.jboss.arquillian.graphene.spi.page.PageExtension;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-
-import static org.mockito.Mockito.when;
+import org.mockito.junit.MockitoJUnitRunner;
 
 /**
  * @author <a href="mailto:jpapouse@redhat.com">Jan Papousek</a>
@@ -63,7 +63,8 @@ public class AbstractPageExtensionInstallatorProviderTestCase {
     @Test
     public void testNoCycleInRequirements() {
         try {
-
+            PageExtensionInstallatorProvider provider = new TestedPageExtensionInstallatorProvider(registry);
+            provider.installator(WithoutCycleA.class.getName());
         } catch(IllegalStateException e) {
             Assert.fail("False positive cycle has been detected. " + e.getMessage());
         }
@@ -169,7 +170,7 @@ public class AbstractPageExtensionInstallatorProviderTestCase {
 
         @Override
         public Collection<String> getRequired() {
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
 
         @Override

@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.jboss.arquillian.graphene</groupId>
         <artifactId>graphene-parent</artifactId>
-        <version>2.3.3-SNAPSHOT</version>
+        <version>2.3.2-topicus1</version>
     </parent>
 
     <artifactId>graphene-webdriver-ftest</artifactId>
@@ -21,9 +21,9 @@
         <platform>ANY</platform>
         <browser.version>undefined</browser.version>
 
-        <tomcat.version>7.0.55</tomcat.version>
+        <tomcat.version>8.5.66</tomcat.version>
         <tomcat.home>target/apache-tomcat-${tomcat.version}</tomcat.home>
-        <arquillian.tomcat.version>1.1.0.Final</arquillian.tomcat.version>
+        <arquillian.tomcat.version>1.2.0.Alpha1</arquillian.tomcat.version>
     </properties>
 
     <dependencies>
@@ -60,12 +60,12 @@
 
         <dependency>
             <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
+            <artifactId>hamcrest-core</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
+            <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -83,7 +83,7 @@
 
         <dependency>
             <groupId>org.jboss.arquillian.container</groupId>
-            <artifactId>arquillian-tomcat-managed-7</artifactId>
+            <artifactId>arquillian-tomcat-managed-8</artifactId>
             <version>${arquillian.tomcat.version}</version>
             <scope>test</scope>
         </dependency>

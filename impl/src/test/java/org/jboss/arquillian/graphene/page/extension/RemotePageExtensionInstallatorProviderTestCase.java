@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Collections;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.jboss.arquillian.graphene.spi.javascript.JavaScript;
 import org.jboss.arquillian.graphene.spi.page.PageExtension;
@@ -34,7 +34,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.JavascriptExecutor;
 
 /**
@@ -49,7 +49,7 @@ public class RemotePageExtensionInstallatorProviderTestCase {
     @Before
     public void prepareDriver() {
         when((executor).executeScript("install")).thenReturn(null);
-        when((executor).executeScript("check")).thenReturn(false, true, true);
+        when((executor).executeScript("check")).thenReturn(false, false, true);
     }
 
     @Test
@@ -58,7 +58,7 @@ public class RemotePageExtensionInstallatorProviderTestCase {
         PageExtension pageExtensionMock = Mockito.mock(PageExtension.class);
         when(pageExtensionMock.getExtensionScript()).thenReturn(JavaScript.fromString("install"));
         when(pageExtensionMock.getInstallationDetectionScript()).thenReturn(JavaScript.fromString("check"));
-        when(pageExtensionMock.getRequired()).thenReturn(Collections.EMPTY_LIST);
+        when(pageExtensionMock.getRequired()).thenReturn(Collections.emptyList());
         when(pageExtensionMock.getName()).thenReturn("mock");
         // registry
         PageExtensionRegistry registry = new PageExtensionRegistryImpl();
