@@ -32,15 +32,11 @@ import org.jboss.arquillian.graphene.proxy.GrapheneProxy;
 import org.jboss.arquillian.graphene.proxy.GrapheneProxyHandler;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.arquillian.test.spi.enricher.resource.ResourceProvider;
+import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.HasInputDevices;
-import org.openqa.selenium.interactions.HasTouchScreen;
-import org.openqa.selenium.interactions.Mouse;
-import org.openqa.selenium.interactions.Keyboard;
 
 /**
  * Provides common Selenium objects as Arquillian resources
@@ -144,34 +140,6 @@ public abstract class SeleniumResourceProvider implements ResourceProvider {
         }
     }
 
-    public static class KeyboardProvider extends IndirectProvider<HasInputDevices> {
-        @Override
-        public Object generateProxy(HasInputDevices base) {
-            return base.getKeyboard();
-        }
-
-        @Override
-        protected String getReturnType() {
-            return Keyboard.class.getName();
-        }
-    }
-
-    /**
-     * This is a resource provider for Mouse interface.
-     * It is used in an internal code.
-     */
-    public static class MouseProvider extends IndirectProvider<HasInputDevices> {
-        @Override
-        public Object generateProxy(HasInputDevices base) {
-            return base.getMouse();
-        }
-
-        @Override
-        protected String getReturnType() {
-            return Mouse.class.getName();
-        }
-    }
-
     public static class CapabilitiesProvider extends IndirectProvider<HasCapabilities> {
         @Override
         public Object generateProxy(HasCapabilities base) {
@@ -184,26 +152,14 @@ public abstract class SeleniumResourceProvider implements ResourceProvider {
         }
     }
 
-    public static class TouchScreenProvider extends IndirectProvider<HasTouchScreen> {
-        @Override
-        public Object generateProxy(HasTouchScreen base) {
-            return base.getTouch();
-        }
-
-        @Override
-        protected String getReturnType() {
-            return "org.openqa.selenium.interactions.TouchScreen";
-        }
-    }
-
     /**
      * This is a resource provider for Action interface.
      * It is used in an internal code.
      */
-    public static class ActionsProvider extends IndirectProvider<HasInputDevices> {
+    public static class ActionsProvider extends IndirectProvider<WebDriver> {
         @Override
-        public Object generateProxy(HasInputDevices base) {
-            return new Actions ((WebDriver) base);
+        public Object generateProxy(WebDriver base) {
+            return new Actions(base);
         }
 
         @Override
