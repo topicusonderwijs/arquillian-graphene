@@ -35,7 +35,6 @@ import org.jboss.arquillian.test.spi.enricher.resource.ResourceProvider;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.HasCapabilities;
-import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
 
 /**
@@ -116,30 +115,6 @@ public abstract class SeleniumResourceProvider implements ResourceProvider {
         }
     }
 
-    public static class LocalStorageProvider extends IndirectProvider<WebStorage> {
-        @Override
-        public Object generateProxy(WebStorage base) {
-            return base.getLocalStorage();
-        }
-
-        @Override
-        protected String getReturnType() {
-            return "org.openqa.selenium.html5.LocalStorage";
-        }
-    }
-
-    public static class SessionStorageProvider extends IndirectProvider<WebStorage> {
-        @Override
-        public Object generateProxy(WebStorage base) {
-            return base.getSessionStorage();
-        }
-
-        @Override
-        protected String getReturnType() {
-            return "org.openqa.selenium.html5.SessionStorage";
-        }
-    }
-
     public static class CapabilitiesProvider extends IndirectProvider<HasCapabilities> {
         @Override
         public Object generateProxy(HasCapabilities base) {
@@ -215,6 +190,7 @@ public abstract class SeleniumResourceProvider implements ResourceProvider {
             this.mediatorType = getTypeArgument(0);
         }
 
+        @SuppressWarnings("unchecked")
         protected <BASE> BASE base(final Annotation[] annotations) {
             final GrapheneProxy.FutureTarget futureTarget = new GrapheneProxy.FutureTarget() {
                 @Override
